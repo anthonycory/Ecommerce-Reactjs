@@ -8,14 +8,14 @@ import Nav from './component/Nav'
 function App() {
 
     const [product, setProduct] = useState(null)
-    const [purchase, setPurchase] = useState([{id : 0}])
-    const [quantity, setQuantity] = useState([])
+    const [purchase, setPurchase] = useState([{id: 1}])
+    const [quantityProduct, setQuantityProduct] = useState([])
     const url = "https://fakestoreapi.com/products"
 
     useEffect(() => {
       fetch()
-      console.log(purchase)
-    }, [url, purchase, quantity])
+      console.log(quantityProduct)
+    }, [url, purchase, quantityProduct])
 
     // RECUPERATION DES PRODUITS
     const fetch = () => {
@@ -26,17 +26,20 @@ function App() {
     const Addproduct = (e, item) => {
         e.preventDefault();
         const a = [...purchase];
-              a.push(item)
-              setPurchase(a)
+        a.push(item)
+        setPurchase(a)
 
-              console.log([{id: 1, quantity: 5}, {id: 2, quantity: 2}])
-        for (let i = 0; i < quantity.length; i++) {
-          if(quantity[i].index != -1) {
-    
+
+        for(let i = 0; i < purchase.length; i++) {
+          if(purchase[i].id === item.id) {
+            console.log("existe déjà")
+          }else {
+            console.log("non non")
           }
         }
     }
 
+    // SUPPRESSION PRODUCT
     const RemoveProduct = (e, index) => {
       e.preventDefault()
       console.log(index)
@@ -48,10 +51,9 @@ function App() {
         {/* <NavLink exact={true} to="/">hello</NavLink> */}
         <div id="acces-product">
           <br></br><br></br><br></br>
-          {quantity[0]}
-          {purchase.length <= 0 ? 
-          <li>Aucun article dans le panier</li> : 
-          ( purchase.map((item, index) => (
+          {purchase.length <= 0 ? (
+            <li>Aucun article dans le panier</li>
+          ) : ( purchase.map((item, index) => (
             <div key={index}>
             <div >{item.title}</div>
             <button onClick={(e) => RemoveProduct(e, index)}>remove</button>
