@@ -6,7 +6,6 @@ import axios from 'axios'
 
 export default function Home({ Addproduct}) {
     const [product, setProduct] = useState(null)
-    const [purchase, setPurchase] = useState([])
     const url = "https://fakestoreapi.com/products"
 
     useEffect(() => {
@@ -14,8 +13,8 @@ export default function Home({ Addproduct}) {
         .then(response => {
             setProduct(response.data)
         })
-        console.log(purchase)
-    }, [url, purchase])
+
+    }, [url])
 
     // const Addproduct = (event, item) => {
     //     event.preventDefault();
@@ -33,12 +32,13 @@ if(product) {
             {product.map((item, index) => (
                        <div className="card" key={index} style={{width: "18rem"}}>
                            <div className="" style={{display: "flex", height: 250, alignItems: "center"}}> 
-                       <img className="card-img-top" src={item.image} style={{width: 150, marginRight: "auto", marginLeft: "auto"}}  alt="Card image cap"/>
+                       <img className="card-img-top" src={item.image} style={{width: 150, marginRight: "auto", marginLeft: "auto"}}  alt="lo"/>
                            </div>
                        <div className="card-body">
                          <h5 className="card-title">{item.title.substring(0, 20)}</h5>
                          <p className="card-text">{item.price} €</p>
-                         <a href="#" onClick={(e) => Addproduct(e, item)} className="btn btn-primary">Ajouter au panier</a>
+                         
+                         <button className="btn btn-primary" onClick={(e) => Addproduct(e, item)}>Ajouter le produit</button>
                        </div>
                      </div>
             ))}
