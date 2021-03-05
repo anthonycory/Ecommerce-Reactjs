@@ -1,8 +1,10 @@
 nav {
-    width: 100%;
-    height: 50px;
-    background: #e8e8e8;
-    
+  width: 100%;
+  height: 70px;
+  background: #222;
+  display: flex;
+  justify-content: center;
+  border-color: #080808;
 }
 
 .card {
@@ -21,7 +23,6 @@ nav {
   justify-content: space-between; */
   overflow: hidden;
   margin-top: 20px;
-
 }
 .main {
   width: 100%;
@@ -34,7 +35,7 @@ nav {
 .container-item {
   width: 80%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: auto;
     grid-gap: 10px;
     margin-top: 50px;
@@ -44,23 +45,11 @@ nav {
 .container {
   display: flex;
   justify-content: space-between;
-}
-
-.card-body {
-  background: #e6e7e8;
-}
-
-.card-img-top:hover {
-  transition: 1s;
-  transform: scale(0.9)
+  width: 80%;
+  align-items: center;
 }
 
 
-.bg-light {
-  position: fixed;
-    z-index: 99999;
-    box-shadow: 0 0 16px rgb(0 0 0 / 8%), 0 1px rgb(0 0 0 / 8%);
-}
 
 #acces-product {
   position: fixed;
@@ -75,4 +64,70 @@ nav {
   transition: 1s;
   border-left: 1px solid #e2e2e2;
   overflow: hidden;
+}
+
+.article {
+  font-size: 13px;
+  list-style: none;
+}
+
+.container-article-panier {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 10px;
+}
+
+.payed {
+  background: #51a765;
+  color: white;
+  border: 0px solid #abaaaa;
+  padding: 10px;
+}
+
+.panier {
+  background: #484848;
+  padding: 10px;
+  border: 0px solid #adadad;
+  color: white;
+  width: 150px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.container-panier {
+  display: flex;
+}
+
+.product-panier {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #bfbfbf;
+}
+
+.card-img {
+  display: flex;
+  background: white;
+  height: 250px;
+}
+
+.border-img {
+  background: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 5px;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: -10px;
+}
+
+.img-product-panier {
+  width: 70px
 }

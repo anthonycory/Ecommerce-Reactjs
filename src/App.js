@@ -1,6 +1,10 @@
 import './App.css';
 import React, { useState, useEffect} from 'react'
 import axios from 'axios'
+// import 'react-notifications/lib/notifications.css';
+// import {NotificationContainer, NotificationManager} from 'react-notifications';
+import toast, { Toaster } from 'react-hot-toast';
+import { AiOutlineConsoleSql, IconName } from "react-icons/ai";
 
 import Home from './component/Home'
 import Nav from './component/Nav'
@@ -8,14 +12,18 @@ import Nav from './component/Nav'
 function App() {
 
     const [product, setProduct] = useState(null)
-    const [purchase, setPurchase] = useState([{id: 1}])
+    const [purchase, setPurchase] = useState([])
     const [quantityProduct, setQuantityProduct] = useState([])
+    const [ArrPrice, setArrPrice] = useState([])
+    const [totalPrice, settotalPrice] = useState()
     const url = "https://fakestoreapi.com/products"
+
 
     useEffect(() => {
       fetch()
-      console.log(quantityProduct)
-    }, [url, purchase, quantityProduct])
+      console.log(ArrPrice)
+      console.log(Math.round(totalPrice * 100) / 100)
+    }, [url, purchase, quantityProduct, ArrPrice, totalPrice])
 
     // RECUPERATION DES PRODUITS
     const fetch = () => {
@@ -28,15 +36,20 @@ function App() {
         const a = [...purchase];
         a.push(item)
         setPurchase(a)
+        toast.success('Article ajouter au panier')
 
+        const price = [...ArrPrice]
+        price.push(item.price)
+        setArrPrice(price)
 
-        for(let i = 0; i < purchase.length; i++) {
-          if(purchase[i].id === item.id) {
-            console.log("existe déjà")
-          }else {
-            console.log("non non")
-          }
+        if(ArrPrice.length != 0) {
+          const reducer = (accumulator, currentValue) => accumulator + currentValue;
+          const total = ArrPrice.reduce(reducer, ArrPrice[0])
+          settotalPrice(total)
+        }else {
+          settotalPrice(item.price)
         }
+
     }
 
     // SUPPRESSION PRODUCT
@@ -50,18 +63,20 @@ function App() {
     <>
         {/* <NavLink exact={true} to="/">hello</NavLink> */}
         <div id="acces-product">
-          <br></br><br></br><br></br>
-          {purchase.length <= 0 ? (
-            <li>Aucun article dans le panier</li>
-          ) : ( purchase.map((item, index) => (
-            <div key={index}>
-            <div >{item.title}</div>
-            <button onClick={(e) => RemoveProduct(e, index)}>remove</button>
+          <h2>Mon panier</h2>
+          {purchase.map((item, i) => (
+            <div className="product-panier" key={i}>
+              <img className="img-product-panier" src={item.image}/>
+              <div>
+                <p>{item.title.substr(0, 20)}</p>
+                <p>{item.title.substr(0, 20)}</p>
+              </div>
             </div>
-            )
           ))}
         </div>
-        <Nav total={purchase.length}/>
+
+        <Toaster position="top-left" reverseOrder={true}/>
+        <Nav total={purchase.length} price={totalPrice}/>
         <Home Addproduct={Addproduct} />
     </>
   );

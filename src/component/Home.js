@@ -31,15 +31,19 @@ if(product) {
 
             {product.map((item, index) => (
                        <div className="card" key={index} style={{width: "18rem"}}>
-                           <div className="" style={{display: "flex", height: 250, alignItems: "center"}}> 
+                           {/* <div className="card-img">
+                                <img className="card-img-top" src={item.image} style={{width: 150, height: "auto", marginRight: "auto", marginLeft: "auto"}}  alt="lo"/>
+                            </div> */}
+                            <div className="border-img" style={{display: "flex", height: 250, alignItems: "center"}}> 
                        <img className="card-img-top" src={item.image} style={{width: 150, marginRight: "auto", marginLeft: "auto"}}  alt="lo"/>
                            </div>
                        <div className="card-body">
-                         <h5 className="card-title">{item.title.substring(0, 20)}</h5>
-                         <p className="card-text">{item.price} €</p>
-                         
-                         <button className="btn btn-primary" onClick={(e) => Addproduct(e, item)}>Ajouter le produit</button>
-                       </div>
+                            <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
+                                <p>{item.title.substr(0, 20)}</p>
+                                <p>{item.price} €</p>
+                            </div>
+                            <button onClick={(e) => Addproduct(e, item)}>Panier</button>
+                       </div> 
                      </div>
             ))}
             </div>
